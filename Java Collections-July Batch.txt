@@ -1,0 +1,185 @@
+Collections:
+group of data
+EX : list of products in amazon
+	list of employees
+	list of candidates
+DataStructures-
+Sorting algorithms:
+	BubbleSort
+	SelectionSort
+	InsertionSort
+	QuickSort
+	MergeSort
+Searching algorithms:
+	LinearSearch
+	BinarySearch
+
+Collections in Java implement data structures internally and help to handle group of
+similar data.
+Collection – is an object that groups multiple elements into single unit.
+
+
+
+
+Actions performed on a collection:
+Store, Retrieve – search for a element, Manipulate, Delete
+
+Collections and Arrays:
+Arrays size is predefined, collections size need not be specified
+We have multiple implementations like List,Set, Queue, Map in collections
+Arrays can store primitives but collections will store only objects
+int[] ids, Integers[] ids
+List<Integer>
+
+Java.util
+Collection – Interface
+Collections- class in java which is having helper methods to deal with collection objects.
+Arrays - class in java which is having helper methods to deal with array objects.
+Collection – List, Set, Queue
+Map 
+
+List(I) – ArrayList, Vector, LinkedList
+Set(I)- HashSet, TreeSet, LinkedHashSet
+Map(I)- HahsMap, TreeMap, LinkedHashMap, HashTable
+Queue(I)- PriorityQueue, LinkedList
+
+
+Assignment 1:
+write a program to print even numbers in the given list of numbers.
+write a program to print multiplication table for given number:
+2*1=2
+2*2=4
+
+unordered
+ordered – any order for retrieving elements in a collection, eg : by index, by order of insertion
+unsorted –
+sorted – in ascending or descending order
+
+All ordered collections need not be sorted but all sorted collections are ordered.
+
+List:
+It allows duplicates.
+It is unsorted collection but it is ordered collection, it is ordered by insertion order.
+We can iterate list using basic for loop. for each loop(enhanced for loop) and also iterator.
+Iterator and foreach difference:
+Iterator is safe way to modify a collection during iteration- we can use to remove some element
+from collection while you are iterating
+Iterate multiple collections in parallel.
+
+Important methods:
+get
+add
+size
+remove
+addAll
+removeAll
+iterator
+add(index, object)
+
+ArrayList:
+It internally uses dynamic array implementation. (it is growable)
+It implements Random access interface which makes it faster for iterations.
+It is faster for storing and searching the specific data.
+Vector:
+Vector is similar to ArrayList but it allows user to provide capacity and capactityIncrement through overloaded constructor.
+By Default if we do not give any capactityIncrement then it doubles the capacity once it reaches
+the max limit of initial capacity. But ArrayList will increase capacity by 50 percent.
+Vector methods are synchronized.(it is safer to use in a multithread environment).
+It is slower when compared to ArrayList bcz of the methods being synchronized.
+Specific vector methods:
+getCapacity()
+LinkedList:
+Java internally implements Double Linked List structure.
+It follows order of insertion.
+LinkedList implements both List interface and also Queue interface.
+LinkedList is faster than ArrayList when it comes to insertions and deletions.
+ArrayList is faster than LinkedList when it comes to just iterating the data and searching for data.
+Specific LinkedList methods:
+addFirst()
+addLast()
+add(index, object)
+removeFirst()
+removeLast
+removeFirstOccurance(obj)
+removeLastOccurance(obj)
+peek
+poll
+pop
+
+Set:
+Set do not allow duplicates.
+If we try to add duplicate there is no compilation or runtime error but it just ignores
+the duplicate element- it will skip to add duplicate element.
+HashSet:
+HashSet internally uses Java Hashing algorithm (hashcode) and it is faster than others set implementations.
+It is unsorted and unordered.
+It allows one null value.
+LinkedHashSet:
+It is ordered by insertion.
+It is faster for insertions and deletions.
+For iterations HashSet is faster than LinkedHashSet.
+TreeSet:
+It is sorted and ordered.(By natural ascending order)
+It implements red black tree structure internally.
+It do not allow null.
+
+
+
+Assignment:
+Write a program that return true if string contains atleast one duplicate character
+else return false
+Remove duplicates from the given list of strings.
+Remove duplicates and also sort the strings in the given list.
+i/p : hi , hello, hello, java,cat,
+o/p: cat, hello, hi, java
+
+Map:
+Stores elements in Key value pairs(we can use any java object as a key and value)
+Keys should be unique, if we try to duplicate a key – existing value will be overridden with new value.
+HashMap: 
+It is unsorted and unordered.
+It allows one null key and multiple null values
+HashTable:
+It is unsorted and unordered.
+The methods in HashTable are synchronized (it is safe in multithreaded environment).
+It will not allow null key and also null values.
+It is slower than HashMap bcz of methods being synchronized.
+LinkedHashMap:
+It is ordered by insertion order
+It allows one null key and multiple null values
+TreeMap:
+sorted and ordered- natural ascending order
+It allows null values but not null keys.
+
+
+Sorting of collections:
+To Sort list of Strings or any wrapper class objects – Collections.sort(list)
+To Sort list of custom class objects – Collections.sort(list) along with comparable or comparator
+To Sort set of Strings or any wrapper class objects – TreeSet
+To Sort set of custom class objects – TreeSet along with comparable or comparator
+To Sort map of Strings or any wrapper class objects  as keys– TreeMap
+To Sort map of custom class objects  as keys– TreeMapalong with comparable or comparator
+
+Comparator/Comparable:
+2 interfaces in Java used to sort the collections.
+they give you a way to tell  collections about your sort logic.
+Comparable interface has a method compareTo
+Comparator interface has a method compare
+Comparable forces to modify exisiting class like Employee to implement Comparable interface
+Comparators do not force to modify exisiting class like Employee to implement Comparator interface, you can write sort logic in a separate class or in the class.
+Comparator allows more than sort condition to be applied
+
+Queue – FIFO
+PriorityQueue class follows priority(natural ascending/sort) order but not FIFO order
+
+
+List- ArrayList, Vector, LinkedList
+
+Set- HashSet, LinkedHashSet,TreeSet
+
+Map- key value pairs
+HashMap,LinkedHashMap,TreeMap,HashTable
+
+Queue - FIFO
+PriorityQueue- natural sort order,
+
