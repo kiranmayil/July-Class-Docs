@@ -1,0 +1,224 @@
+SQL - Joins
+
+Join 2 tables and get the record from them.
+Primary key - Values must be unique and not null
+Foriegn Key - Primary key in one table becomes foreign key to another table.
+
+Types of Joins:
+1) Natural join
+2) Self join
+3) Inner join
+4) Outer join/ full join
+	Left outer join
+	Right outer join
+5) cross join/cartesian product
+
+Employee 								Department 
+empid   empname deptid	managerid		deptid 	 deptname	managerid
+10		john	50			67			50			sales		67
+20		abc		50			67			60			IT			67
+30		xyz		60			67			70			admin		89
+40		dfg		40			89			80			hr			90
+50		hjk		50			89
+
+natural join - 5 rows 
+
+Natural join - they have same column name n also their data type
+when we have more than one similar column names
+if you are trying retrieve records from the columns which have same name but diff data type then 
+their is an error returned.
+
+select empid, empname, deptid, deptname from employee natural join department;
+
+Alias the table:
+neat representation, fast output
+dont use alias name for columns which u are comapring and at the using clauses
+
+select e.empid, e.empname, deptid, d.deptname from employee e natural join department d using (deptid);
+
+select employees.empid, employees.empname, deptid, department.deptname from employee 
+natural join department using (deptid);
+
+select employee_id emp, first_name fir, last_name las, manager_id
+from employees;
+
+Using clause:
+select empid, empname, deptid, deptname from employee natural join department using (deptid);
+
+ON clause:
+select empid, empname, deptid, deptname from employee e natural join department d on (e.deptid=d.deptid);
+
+Inner Join: It will pull all the common records from bo the tables
+select column names from table1 innerjoin table2;
+
+Self Join: joining the same table to fetch the records
+
+Inner join - 2 tables pulls the common records from both the tables - using,on
+Natural join - 2 tables pulls the common records from both the tables - using,on
+
+
+joining 3 tables..
+empid, city, departmentname
+
+empid - employees
+city - locations
+departmentname - department
+
+empid - employees table - (deptID) - department table - departmentname
+department table - (locationid) - locations table
+
+Outer Join:
+joining 2 tables and pulling all the records from both the tables
+
+Left Join: 
+it will give us all the records from the left table n the common records from both the tables
+
+
+Right Join: 
+it will give us all the records from the right table n the common records from both the tables
+
+Cross join:
+employee table - 10
+dept table - 5
+result - 50 records
+
+empid   empname deptid	managerid		deptid 	 deptname	managerid
+10		john	50			67			50			sales		67
+20		abc		50			67			60			IT			67
+30		xyz		60			67			70			admin		89
+40		dfg		40			89			80			hr			90
+50		hjk		50			89
+
+select * from employee leftjoin department
+Left join:
+empid   empname deptid	managerid	deptid     managerid
+10		john	50			67			50		67
+20		abc		50			67			50		67
+30		xyz		60			67			60		67
+40		dfg		40			89			null	null
+50		hjk		50			89			50		67
+
+select * from employee rightjoin department
+Right Join:
+deptid 	 deptname	managerid deptID	managerid
+50			sales		67		50		67
+50			sales		67		50		67
+
+
+
+Cartesian product/Cross Join:
+empid   empname deptid	managerid	deptname
+10		john	50			67			sales
+10		john	50			67			It
+10		john	50			67			admin
+10		john	50			67			hr
+20		abc		50			67			sales
+20		abc		50			67			It
+20		abc		50			67			admin
+20		abc		50			67			hr
+30		xyz		60			67			
+40		dfg		40			89			
+50		hjk		50			89
+20 records
+
+
+Sub Query:
+
+main query{
+sub query - sigle row or mutliple rows
+}
+
+#fetch all the departments based on location = 'california'
+select * from locations;
+select location_id from locations where state_province = 'California';
+select * from departments where location_id = 
+(select location_id from locations where state_province = 'California');
+
+sigle row operators - when the sub query returns single row then we can use the below
+operators like =, >, <, <=, >=
+
+muliple row operators - when the sub query returns multiple row then we can use the 
+below operators like any, in, and
+
+#fetch all emplyees who has job_id same as employee with id 141 and salary same as 
+#employee with id 143
+select job_id from employees where employee_id = 141;
+select salary from employees where employee_id = 143;
+select * from employees where job_id= 
+(select job_id from employees where employee_id = 141) and salary =
+(select salary from employees where employee_id = 143);
+
+#fetch all employees who have min salary
+#select all the min sal 
+#emplyees who have min sal
+select min(salary) from employees;
+select * from employees where salary = (select min(salary) from employees);
+
+#fetch employee first_name, department_id, salary of all the employees who have same 
+salary as the minimum sal if department with id 50
+select min(sal) from departments where department_id=50; -- min(sal) in dept -50
+select first_name, department_id, salary from employees where salary=
+(select min(sal) from departments where department_id=50);
+
+#fetch departments whose min sal is greater than min sal of sales department
+select department_id from departments where department_name='sales';
+select min(salary) from employees where department_id = 
+(select department_id from departments where department_name='sales');
+select department_id, (salary) from employees group by department_id having min(salary) >
+(select min(salary) from employees where department_id = 
+(select department_id from departments where department_name='sales'));
+
+#query to find employees who report to king or employees who have king as manager
+select * from employees where last_name = 'King';
+select * from employees;
+select * from employees where manager_id = 
+(select employee_id from employees where last_name = 'King' and manager_id is null);
+select * from employees where last_name = 'King' and manager_id is null;
+
+
+#query to find top salaried employee details in each department
+select department_id,max(salary) from employees group by department_id;
+select * from employees where salary in
+(select max(salary) from employees group by department_id);
+
+#query to find employee details of second highest salaried person
+select max(salary) from employees where salary not in 
+(select max(salary) from employees);
+select * from employees where salary = 
+(select max(salary) from employees where salary not in 
+(select max(salary) from employees));
+select * from employees where salary = 
+(select max(salary) from employees where salary < 
+(select max(salary) from employees));
+
+#fetch top 5 highest saalries
+select distinct(salary) from employees order by salary desc limit 5;
+
+#fetch to get first name, employee id, salary of employees whose saalry is within 
+#top 5 haighest salaries
+select first_name, employee_id, salary from employees where salary in
+(select * from(select salary from employees order by salary desc limit 6) as t);
+
+SELECT employee_id, last_name, job_id, salary
+FROM employees
+WHERE salary < ANY
+(SELECT salary FROM employees WHERE job_id = 'IT_PROG')
+AND job_id <> 'IT_PROG';
+
+SELECT employee_id, last_name, job_id, salary
+FROM employees
+WHERE salary < ALL
+(SELECT salary FROM employees WHERE job_id = 'IT_PROG')
+AND job_id <> 'IT_PROG';
+
+Set Operators:
+a{1,2,3,4} b = {1,2,3}
+Union - {1,2,3,4}
+Union all - {1,2,3,4,1,2,3}
+intersect - {1,2,3}
+minus - {4}
+
+
+
+
+

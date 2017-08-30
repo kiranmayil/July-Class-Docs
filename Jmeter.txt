@@ -1,0 +1,127 @@
+
+Jmeter -
+100% java based based performance testing tool
+Performance testing - checks the perforANCE OF THE SYSTEM/application under load
+responsives, speed, scalibility, stability
+
+100/1000 - 
+
+Tools for load testing:
+jmeter, load runner, silk performer...
+
+jmeter - open source, UI, integtrate with other tools like jenkins
+
+Types of performance testing:
+
+load testing - testing the appalication under load(concurrent users)
+stress testing - to know the applications break point 
+volume testing - testing on database
+endurance testing - testing the application for high load over a period 
+	of time(24 - 48 hrs)
+	
+User point of view - how fast my application is responding
+Business point view(dev, owner, tester) - how many users i am gng to serve, 
+how fast iam to serve
+system hardware configurations - CPU, memory, n/w, bandwidth, server, OS
+
+How it works :
+tool,choose the target server, business flows that are to be testing, 
+simulate no of users/thread(100), listeners(to collect the test results), Assertions,
+pre processors n post processpors, 
+
+Thread - user
+
+Ramp up  - taken taken to start all the threads
+10 threads - rampup time - 10sec
+
+Points to see in the response/output:
+Throughput - no of request processing per sec
+load time - time taken to load the page
+connect time - time taken to connect to the server
+latency - time taken to get the first byte of response/output
+sample error% - total number of errors occured
+size - bytes/sent bytes
+
+Data driven testing on Jmeter
+1) user defined variables - instead of hardcoding  in the script, we pass the data 
+using user defined variables.
+2) CSV file - includonh external CSV passing the data to the script
+3) JDBC connections - 
+Jdbc connection configuration
+jdbc request - selcect statememnts
+ojdbc jar - put that in jmeter lib folder
+http://jmeter.apache.org/usermanual/build-db-test-plan.html - how to configure a test
+downloading the jar
+https://dev.mysql.com/downloads/file/?id=472395
+https://wiki.apache.org/jmeter/JMeterAndMySQL
+
+WebServices - Soap
+RestApi - 
+Google API's 
+
+AIzaSyDuuK2n4yQTC4vIXRgsCUuYmzyNHl0luo8
+
+https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=YOUR_API_KEY
+
+
+https://support.google.com/googleapi/answer/6158841 - steps to enable the API
+
+
+Server side metrics/ performance
+plugins to jmeter - perfmon
+webload
+
+to open jmeter from the command promt
+bin>jmeter -n -t path of the script(c:/downloads/walamrttest.jmx) -l path of the results(c:/resultsFolder/testWalmart) 
+
+jmeter -n –t test.jmx -l testresults.jtl
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+oops - 
+abstraction
+inheritance
+polymorohism
+encapsulation
+
+overloading, overwriting
+constructor
+staic, final
+
+
+
+
+
+
+
+
+
+
+
+

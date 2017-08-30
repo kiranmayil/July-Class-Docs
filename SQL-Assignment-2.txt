@@ -1,0 +1,12 @@
+
+Assignment:
+#fetch 6th to 10th top salaries?
+#fetch employees whose salary is less than salaries of employee with job_id 'it_prog'
+#write a query to select firstname and hire date of employees who were hired after employee steven
+1) Write a query to Select first_name, dept name, deptid,salary  from employees 
+table and departments table  based on all the common column. 
+2)Write a query to Select first_name, dept name, deptid,salary  from employees 
+table and departments table  based on dept id
+3) Write a query to Select  city, firstname, deptname  for an employee 
+4)Write a query to fetch  empname, deptname and deptid  of all the
+departments based on their dept name
