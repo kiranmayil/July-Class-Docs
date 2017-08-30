@@ -1,0 +1,95 @@
+Sprint 1 - 100Tc
+sprint2 - 100tc + 100tc
+
+login scenario - 20sets
+
+Advantages of Automation:
+human tendency to miss something - automation 
+test coverage is good 
+fast 
+regression testing
+data driven testing
+
+limitations of automation testing/ when we cant go for automation
+shorter time limits - 
+look and feel - UI testing - video n audio quality - 
+catcpha images, otp generations, barcodes
+dev - 
+in the test environment we can make it constant
+call to captca service
+java code
+web/browser applications - 
+UI/elements(textbox, buttons, dropdown) of the page is frequently change
+ login - 
+ manually - open, enter un , pwd, click ok, 
+ automation - opens the browser, find the textbox to enter un, pwd, button, 
+ asserting for nxt steps
+ 
+Tools available to auomate:
+
+
+http://www.seleniumhq.org/ - official website for selenium
+
+What is selenium -
+selenium webdriver(API) is a tool used to automate webapplication
+Webdriver - it is an interface from selenium webdriver api, 
+which is used to autmate web applications
+
+WebElements - 
+
+Components:
+IDE, RC, Grid, Webdriver
+
+IDE - plugin for firefox, record and playback tool,assert statments
+
+testcase:
+testcase
+executeit - result
+assert(actual,expected) - passed/failed
+actual - result
+expected - specification doc
+
+assert/ verify:
+assert(act,exp) - true - passed - it continues with the execution
+				  false - failed - it comes out of the method, it is not 
+				  gng to continue with the rest of the steps in the same methods.
+verify(act,exp) - true - passed - it continues with the execution
+				  false - logs the erroe and contiues the next steps in the 
+				  same method.
+
+Limitations of IDE:
+Record options - limited options, cannot enchance the code according to the requirement
+only works for firefox
+we cannot integrate with other tools
+
+RC: - remote control
+code based,
+
+
+WebDriver:
+Fast, integrate with other tools, supports different languages
+
+To setup the environment:
+1) IDE - Eclipse, IntelliJ
+2) Selenium jars - maven, testng, drivers, selenium jars
+3) setup the automation framework
+	1) selenium webdriver
+	2) Testng(testing framework)
+	3) java
+	4) maven(build tool)
+	5) git - source repository
+	6) jenkins - integration tool
+4) create automation scripts
+
+
+
+
+
+
+
+
+
+
+ 
+
+
