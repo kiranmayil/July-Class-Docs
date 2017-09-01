@@ -81,6 +81,38 @@ To setup the environment:
 	6) jenkins - integration tool
 4) create automation scripts
 
+Selenium Webdriver - tool used to automate web applications
+
+WebDriver - API
+
+get()
+getTitle()
+findElement
+findElements() -
+getcurrentURL-
+close
+quit
+getpagesource
+getWindowHandles - 
+
+Which selenium version?
+3.0
+geckodriver
+htmlunitdriver - headless browser
+in selenium grid stability issues has been fixed
+
+findElement - it locates one elemnt on the page, it returns WebElement, 
+looking for element - it i snot present on the html page - NoSuchElementFound Exeception
+
+findElements - it locates list if elemnets on  the page, it returns List<WebElements>
+looking for element - it i snot present on the html page - it returns empty list
+
+Example : dropdown -
+male 
+female
+others
+
+http://blog.varunin.com/2012/08/find-element-using-css-locatorsselector.html
 
 
 
