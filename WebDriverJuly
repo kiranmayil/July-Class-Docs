@@ -1,0 +1,543 @@
+PageObject pattern:
+Every page in UI application will have a corresponding Java Page Class and Test Class.
+Main advantage of PageObject pattern is clear separation of testcases which helps for easy maintenance.
+Also it avoids code redundancy.
+
+Page classes - have the logic to identify the WebElement and return back the actual value/elements needed for assertions.
+TestClasses -  assertions 
+
+
+HomePage- test navigations manu, header links, search box,click signin, register....
+SearchResultsPage- test the no of results, valid reslts, sort features(by rating, price), filters...
+SearchDetailsPage-
+AddToCartPage
+
+
+HomePageTest
+SearchResultsPageTest
+SearchDetailsPageTest
+AddToCartPageTest
+
+***********************
+maven,git, jenkins
+
+maven- pom.xml (maven with TestNG)
+git/svn/pvcs- code repository
+TestNG- testng.xml
+
+*****************************
+
+WebDriver: API
+tool used to automate web applications
+
+get
+findElement
+findElements
+getTitle
+close - close the current instance of the browser 
+quit - closes all the browser instances
+windowhandle
+windowhandles
+
+WebElement:
+
+click- we can click on link or button
+sendKeys- to send/input text into the text boxes
+getText()- to get inner text of an element
+getAttribute
+isDisplayed() - boolean value - used on any webElemnt
+isEnabled() - boolean value - used on any webElemnt
+isSelected() - boolean value - used on radiobuttons, checkboxes, //dropdown
+
+DropDowns:
+Select
+selectByIndex
+selectByVisibleText
+selectByValue
+
+**********************
+
+findElement - it locates one elemnt on the page, it returns WebElement, 
+looking for element - it i snot present on the html page - NoSuchElementFound Exeception
+
+findElements - it locates list if elemnets on  the page, it returns List<WebElements>
+looking for element - it i snot present on the html page - it returns empty list
+
+****************
+http://blog.varunin.com/2012/08/find-element-using-css-locatorsselector.html
+
+//*[@id='navbar-collapse']/ul/li[2]/a
+//div[@id='navbar-collapse']/ul/li
+li[class*='nav-item']
+[class*='nav-item']
+//li[@class='nav-item']
+
+<h1 class="heading heading-d" data-reactid=".0.0.1.0.1.2">Sign in to your account</h1>
+tagname - h1
+attributes - key, value pair - class, data-reactid
+innertext - Sign in to your account
+
+
+By class methods:
+
+id - attribute, 
+name - attribute
+classname - attribute
+tagname - h1,input, form, p, a, div...
+linktext - entire link text on the webpage
+partiallinktext - partial link text
+xpath - path, location on the page, absolute n relative xpath
+xpath disadvantages:
+1) hard to understand, write
+2) it will not always work with IE
+1) backward and forward in using the path
+<div>
+<div>
+<div>
+css - east to write, understand, simple
+
+********
+
+Thread.sleep(3000);// by default pause program execution
+it is from java, it is going to stop the execution for the specified time what ever might  
+be the case
+
+element is loaded immediately
+its taking time to load the element 
+
+
+Waits:
+
+ImplicitWait: implicit wait waits for any of the element that takes time to load in webpage/poll the DOM.
+default is 0 seconds.
+it will wait untill the time specified in the wait and if the elemnt is not found it is 
+going to throw an exception.
+In implicit wait it is going to check for the element first then wait for the entire time what we are specifing in the
+implicit wait. it is on driver and it applicable to all the elements that are open with the driver.
+for entire page
+
+driver.manage().timeouts().implicitlWait(20, TimeUnit.SEONDS);
+
+It wil initially check if the element is present , if its found then it will not wait for given wait time 20secoonds
+if it is not found 0 then it waits for complete wait time(eg:20seconds) even though element is avaialble within 10 or 15 seconds.
+
+Meaning which it checks first at 0th sec and after 20 seconds- not in between
+
+
+ExplicitWait:
+It waits for a specific element or condition
+		
+		WebDriverWait wait = new WebDriverWait(driver,30);
+		element =wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".prime-button-try>a")));
+		element.click();
+		
+It wil initially check if the element is present , if its found then it will not wait for given wait time(20secoonds)
+
+if it is not found at 0th sec then it starts waiting for given waittime
+but it keeps checking in between by default for every 500ms if element is found- if it is found then it will not wait for entire time
+20seconds
+0th
+500ms
+.....
+10th sec or 15th sec - 
+Syntax:
+WebDriverWait wait = new WebDriverWait(driver,20);
+List<WebElement> ddValues = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector(".typeahead-row-link")));
+
+
+Fluent Wait: 
+is s type of explicit wait where we have option o override the polling/frequency time
+and we have other option like ignoringException...
+
+both explicit wait and fluent wait have method - wait.until- which accepts
+ExpectedConditions, Function and Predicate.
+Predicate(I) has apply method where output is always boolean and any input type
+but in function(I) you can have your own output and input types in method.
+Syntax:
+WebDriverWait wait = new FluentWait(driver).
+							.pollingEvery(10,TimeUnit.Seconds)
+							.withTimeOut(20,TimeUnit.SECONDS)
+							.ignoring(NoSuchElementFound);
+List<WebElement> ddValues = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector(".typeahead-row-link")));
+
+
+When to go for which wait:
+Implicit wait - when there are lot of webelments operations, and you dont know which elech elemnt is taking time
+in that case we will go for Implicit wait
+
+Explicit wait - suppose you are working on a element, and you want to be sure that because of network, 
+you dont want ur TS to be failed
+it only works on single condition or series of steps u can include add to explicit wait condition by using 
+
+Actions:is a class, users mouse realted actions Actions class have some predefined methods.
+hover, click, contextclick, doubleclick, keypress, keyrelease, dragndropby, moveToElement
+mouse hover
+moveTo
+perform
+right click
+drag and drop
+
+perform  - to perform one single on the element
+action.moveToElement("element").perform();
+build - to perform more than one action then we first build and then perform.
+action.moveToElement("element").click().build().perform();
+
+
+navigate:
+to
+back
+forward
+refresh
+
+***************
+Headless browsers:
+
+HtmlUnitDriver
+PhantomJs....
+
+
+Assignment:
+Facebook- registration form submission
+Amazon - go to Accounts&Lists and click on SignIn
+
+
+hidden element example
+delete cookie
+css seletors
+DesiredCapabilities
+FIleUpload
+Tables
+datepicker
+*****************************
+css selector: different ways to write css csselectors
+
+[id='idValue'] or #idvalue
+[class='classValue'] or .classValue
+[name='nameValue']
+[attributeName='attributeValue']
+
+#fblogin>button - direct child
+#fblogin i - any child
+
+#bUYZ-origin
+#c_86m-origin
+
+[id^='a71V']- starts-with
+[id$='a71V']- end-with
+[id*='a71V']- contains
+
+
+[attributename^='attributevalue']- starts-with
+
+[attributename$='attributevalue']]- end-with
+
+[attributename*='attributevalue']- contains
+
+.pull-right.social-icons li:nth-child(3)
+
+.pull-right.social-icons li:nth-of-type(3)
+
+
+sibling -- +
+.logo.col-md-4.col-sm-4+div
+
+https://saucelabs.com/resources/articles/selenium-tips-css-selectors
+
+
+xpath:
+absolute xpath: traverse from the root of the html document all the way to the element,
+It is lengthy.
+It is not preferred bcz it is complex and if any new elements ar added or deleted in betweenwe need to
+again modify our locator.
+
+/html/body/header/div/div/button....
+
+/html/body/header/div[2]/div/ul/li[1]/a/button
+
+relative xpath: Directly identify the element by using its attribute values.
+It is shorter than absolute xpath
+
+//*[@attrname='attrvalue']
+
+//*[@id='headerfblogin']
+
+//*[starts-with(@id,'header')]
+//*[contains(@id,'header')]
+
+//*[contains(text(),'hear')] - to identify element using inner text of the element
+
+//*[starts-with(@attrbutename,'attrvalue')]
+
+//div[@id='navbar-collapse']/ul/li[3]
+
+.//*[@class='hidden-xs top-bar']/following::div[1]
+.//*[@class='header-main container']/preceding::div[2]
+
+//*[@class='logo col-md-4 col-sm-4']/following-sibling::div
+//*[@class='logo col-md-4 col-sm-4']/preceding-sibling::div
+
+xpath- xpath is complex to write 
+we can traverse forward and also backward in a dom using xpath
+we can isentify the lement using its inner text als0 if required by using text()
+which we cannot do in css selectors
+
+css selectors- is simple, easier, faster and more cross browser compatable.
+we can traverse only forward in a dom using css selector
+****************************************
+FileUpload- 
+
+windows based interactions as part of web application
+selenium cannot handle desktop based interactions.
+ 
+we can handle desktop based interactions using
+1. Autoit 
+2. Robot class(java.awt)
+
+https://www.autoitscript.com/site/autoit/
+
+download autoit
+
+part1: script to handle desltop file upload interactions
+to learn about autoit framework methods use-  C:\Program Files (x86)\AutoIt3\AutoIt help file
+open C:\Program Files (x86)\AutoIt3\Au3Info_x64 - which is finder tool(like firepath)
+open C:\Program Files (x86)\AutoIt3\SciTE\sciTE- text editor- type the code and save as autoit file,
+then compile to generate .exe
+ 
+part2: embed the script with web application using selenium
+Once .exe is ready - we wil use this in selenium automation script
+
+
+***************
+buttons
+links
+dropdown menus
+multple windows 
+alerts
+radio button.check boxes
+pagination
+infiite scrolling
+bread crumbs
+********
+
+JavaScriptExecutor
+// script to check if page is loaded completely
+((JavascriptExecutor)driver).executeScript("return document.readyState").equals("complete");
+		
+hidden element
+delete cookie
+table:
+
+//*[@id='mytable']/tbody/tr/td[2]
+
+#mytable>tbody>tr:nth-of-type(2)
+
+
+Alerts 4 types:
+
+1. java script alerts
+cannot right click-- 
+These type of alerts can be handled by Alert class in selenium
+
+window.alert
+window.prompt
+window.confirm
+
+
+2. Modal popups / html popups
+driver.get("http://www.softwaretestinghelp.com/")
+
+wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector([title='close']))).click();
+
+send keys
+
+
+3. Desktop/window based popups
+Handle using Robot or AutoIt
+but best is robot
+
+
+4. browser notifications
+we can handle using DesiredCapabilities
+ChromeOptions
+FirefoxProfile
+
+
+
+Desired capabilties- 
+Settings needed for selenium grid where we want to specify RemoteWebDriver class about
+browser name, version and OS (platform name) details.
+
+Mobile AUtomation- appium- we use desired capabilties to give platform, device and app details
+
+Also we can handle browser specific settings like handling notifications, clean session, enable javascript etc
+
+Firefox and chrome have spefic classess again on top of DesiredCapabilities as below:
+ChromeOptions
+FirefoxProfile
+
+
+
+https://github.com/SeleniumHQ/selenium/wiki/DesiredCapabilities
+https://github.com/SeleniumHQ/selenium/wiki/Grid-Platforms
+
+**********
+broken links:
+
+http://www.seleniumeasy.com/selenium-tutorials/how-to-find-broken-links-using-webdriver-java
+
+**************
+
+Automation Framework- 
+
+PageObject
+
+***
+Assignement:
+
+walmart.com
+go to all department in nav menu
+go to electronics and office
+tvs- click
+assert for page title
+assert Showing 1-40 of 2,870 products
+verify the below breadcrums are working fine.
+Electronics/ TV & Video/ Shop TVs by Size
+******************************************
+
+Automation Framework:
+
+It is created to reuse the code(avoid redundancy) and application is easy to maintain.
+PageObject, KeyWord driven, Data Driven, Modular , etc...
+
+PageObject , Datadriven - Hybrid pattern (combination of one or more patterns)
+
+10 screens/pages in your UI application
+
+20 java classes-
+10 page  classes
+10 test classes
+
+PageObject: It is a design pattern which we use in test automation which helps
+test maintenance and reduces code duplication.
+Page Classes have the methods created to perfom selenium actions on the element
+Test Classes will call the Page class methods , get the actual data and assert with expected data.
+
+advantages:
+
+Clean separation between test code and page code
+Single repository for all testcases of respective page which makes modifications(add or delete functionalty in page)
+easier as testcases are not scattered randomly in java classes.
+
+DataDriven:
+Execute same script with different sets of data,
+We store all the test data in external file (excel/csv) and tests are driven with data using these external files
+
+Explain about automation framework:
+
+we created  automation fw to reuse the code(avoid redundancy) and application is easy to maintain.
+we used PageObject and Data Driven combination in our project.
+Based on any programing language(Java),
+We create PageClasses using SeleniumWebDriver, test classes using any unit test framework(TestNG)
+we create some base/parent classes to handle common code.
+We inject the driver object that is need in all page classes using a common mechanism(depenedency injection)
+we can create webdriver object easier way by using Java Factory design pattern.
+We create some utilities/helper classes which  will be static methods(Java) to deal with common/reusable functionalties.
+eg: WebDriverUtil, ExcelReader, TakeScreenShot,  PropertiesFileReader etc....
+We use TestNG for assertions, testcase managment using testng xml files where we can combine different testcases
+as test suites.We can group testcases, we can handle dependent testcases(one test execution is depenedent on other),
+we can prioritize test cases, we can make use of inbuilt html/xml reports from TestNG,(we can also customize
+the reports using Ireporter,ITestListener- listener, we can customize logs using apache log4j and TestNG-TestListeneradapter.
+)
+we have resources folder where we maintain all the non java files- excel/properties/ driver executbles...
+we used maven for dependency and build managment(we execute tests by using maven cmds like mvn test, mvn clean install)
+(for this we integarte maven and testng together using maven surefire plugin config in pom.xml)
+
+we are also using git as code repository and jenkins for CI and CD.
+
+
+
+
+
+
+Selenium WebDriver
+TestNG
+Java
+Maven 
+PageObject
+ExceptionHandling
+Reports
+Git
+
+
+LoginPage{
+
+
+login(){
+
+username
+password
+submit
+
+
+}
+
+LoginPageTest{
+actaul= login()
+assertEqauls(actual, expected);
+}
+
+
+
+Wellsfargo
+
+Loan Origination System
+
+calculate
+
+EMI- Pricing Calculator 
+input 
+ouput
+
+DataDriven Testing:
+
+We can read using Apache POI or JXL jar.
+
+load file into workbook object
+read row by row
+for evry row read column by column
+read the column data and store in 2 dimensional Object array
+
+
+
+XSSFWorkbook
+XSSFSheet
+XSSFRow
+XSSFCell
+
+
+log4j - 
+
+logging levels:
+all
+
+debug
+info
+warn
+error
+fatal
+
+http://www.baeldung.com/log4j2-appenders-layouts-filters
+
+
+Passed
+Failed
+Skipped
+
+TestListenerAdapter - to customize logs
+IReporter/ITestLIstener - to customize reports
+
+
+
+
+
+
